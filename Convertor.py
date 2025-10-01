@@ -50,34 +50,12 @@ if uploaded_file is not None:
             st.success(f"{input_value} {from_unit} = {result} {to_unit}")
 
         # Step 6: Show all possible conversions for selected "From Unit"
-# Step 6: Show all possible conversions for selected "From Unit" --- Revised code
-st.subheader(f"📊 All possible conversions from {from_unit}:")
+        st.subheader(f"📊 All possible conversions from {from_unit}:")
+        all_conversions = pd.DataFrame(
+            [{"To Unit": k, "Multiply by": v} for k, v in conversion_dict[from_unit].items()]
+        )
+        st.dataframe(all_conversions, use_container_width=True)
 
-if input_value > 0:
-    all_conversions = pd.DataFrame(
-        [
-            {
-                "To Unit": k,
-                "Multiply by": v,
-                "Converted Value": input_value * v
-            }
-            for k, v in conversion_dict[from_unit].items()
-        ]
-    )
-else:
-    all_conversions = pd.DataFrame(
-        [
-            {
-                "To Unit": k,
-                "Multiply by": v,
-                "Converted Value": "-"
-            }
-            for k, v in conversion_dict[from_unit].items()
-        ]
-    )
-
-st.dataframe(all_conversions, use_container_width=True)
-# My addition from previous rev code
     else:
         st.error("No valid conversion factors found in the uploaded CSV.")
 
