@@ -77,3 +77,9 @@ else:
     )
 
 st.dataframe(all_conversions, use_container_width=True)
+# My addition from previous rev code
+    else:
+        st.error("No valid conversion factors found in the uploaded CSV.")
+
+else:
+    st.info("👆 Please upload a CSV file to begin.")
